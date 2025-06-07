@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -39,13 +40,13 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative w-full py-20 md:py-32 text-center bg-gradient-to-br from-background to-muted rounded-xl shadow-lg overflow-hidden">
         {/* Five Column Backdrop with descriptive text */}
-        <div className="absolute inset-0 flex pointer-events-none opacity-20">
+        <div className="absolute inset-0 flex opacity-10"> {/* Removed pointer-events-none, adjusted opacity */}
           {backdropFeatures.map((feature) => (
             <div
               key={feature.title}
-              className="flex-1 border-r border-primary/10 last:border-r-0 flex flex-col items-center justify-center p-3 text-center"
+              className="group flex-1 border-r border-primary/10 last:border-r-0 flex flex-col items-center justify-center p-3 text-center transition-all duration-300 hover:bg-primary/5" // Added group and hover:bg
             >
-              <h4 className="text-sm font-medium text-primary/70 break-words">{feature.title}</h4>
+              <h4 className="text-sm font-medium text-primary/60 break-words group-hover:text-primary group-hover:font-semibold transition-all duration-300">{feature.title}</h4> {/* Adjusted text opacity and added group-hover effects */}
             </div>
           ))}
         </div>
@@ -56,7 +57,7 @@ export default function HomePage() {
             Welcome to MatrixLAB
           </h1>
           <p className="max-w-[700px] mx-auto text-lg md:text-xl text-foreground/80 mb-8 font-body">
-            Unlock the power of linear algebra with interactive visualizations and AI-driven explanations. Dive in and master complex concepts with ease.
+            From first principles to PCA mastery. {/* Changed text here */}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-md transition-transform hover:scale-105">
