@@ -1,13 +1,13 @@
 
 "use client"; // Required for useState and event handlers
 
-import { useState } from 'react'; // Import useState
+import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Sigma, LayoutPanelLeft, BookOpenText, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
-import { cn } from '@/lib/utils'; // Import cn
+import { cn } from '@/lib/utils';
 
 const features = [
   {
@@ -25,11 +25,11 @@ const features = [
 ];
 
 const backdropFeatures = [
-  { title: "EV-EV Crash Course", tooltip: "Eigenvalues & Eigenvectors: Like VIPs, they keep their direction under transformation!" },
-  { title: "EV-EV Visualizations", tooltip: "See the matrix's 'personality' – how it stretches and squashes space!" },
-  { title: "Matrix Playground", tooltip: "Your sandbox for matrix math. No actual sand, we promise." },
-  { title: "Power Method", tooltip: "Iteratively unmasking the 'strongest' eigenvector, one step at a time!" },
-  { title: "PCA", tooltip: "Principal Component Analysis: Finding the essence of your data, like a digital Marie Kondo!" },
+  { title: "EV-EV Crash Course", description: "Eigenvalues & Eigenvectors: Like VIPs, they keep their direction under transformation!" },
+  { title: "EV-EV Visualizations", description: "See the matrix's 'personality' – how it stretches and squashes space!" },
+  { title: "Matrix Playground", description: "Your sandbox for matrix math. No actual sand, we promise." },
+  { title: "Power Method", description: "Iteratively unmasking the 'strongest' eigenvector, one step at a time!" },
+  { title: "PCA", description: "Principal Component Analysis: Finding the essence of your data, like a digital Marie Kondo!" },
 ];
 
 export default function HomePage() {
@@ -52,7 +52,7 @@ export default function HomePage() {
                 "group flex flex-col items-center p-3 text-center border-r border-primary/10 last:border-r-0",
                 "transition-all duration-500 ease-in-out", // General transition for all properties
                 // Default state (when no column is expanded)
-                expandedColumnIndex === null ? "flex-1 justify-center opacity-60" : "",
+                expandedColumnIndex === null ? "flex-1 justify-start pt-6 opacity-60" : "",
                 // Expanded state for the current column
                 expandedColumnIndex === index
                   ? "flex-grow-[5] bg-background/95 opacity-100 z-10 justify-start pt-6" // flex-grow-[5] to expand significantly
@@ -72,10 +72,10 @@ export default function HomePage() {
               )}>
                 {feature.title}
               </h4>
-              {/* Integrated tooltip text - shown only when column is expanded */}
+              {/* Integrated descriptive text - shown only when column is expanded */}
               {expandedColumnIndex === index && (
                 <p className="mt-2 text-xs md:text-sm text-foreground/80 transition-opacity duration-300 ease-in-out opacity-100 px-2 max-w-xs mx-auto">
-                  {feature.tooltip}
+                  {feature.description}
                 </p>
               )}
             </div>
@@ -169,3 +169,4 @@ export default function HomePage() {
     </div>
   );
 }
+
