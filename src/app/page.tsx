@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Sigma, LayoutPanelLeft, Lightbulb, BookOpenText, ArrowRight } from 'lucide-react';
+import { Sigma, LayoutPanelLeft, BookOpenText, ArrowRight } from 'lucide-react'; // Removed Lightbulb
 import Image from 'next/image';
 
 const features = [
@@ -11,12 +11,6 @@ const features = [
     title: "Interactive Playground",
     description: "Visualize eigenvalues, eigenvectors, and matrix transformations in real-time. Supports matrices up to 4x4.",
     link: "/playground"
-  },
-  {
-    icon: <Lightbulb className="h-10 w-10 text-accent" />,
-    title: "AI Concept Explainer",
-    description: "Get AI-powered explanations for linear algebra concepts based on your matrix manipulations.",
-    link: "/playground#ai-explainer" 
   },
   {
     icon: <BookOpenText className="h-10 w-10 text-accent" />,
@@ -40,13 +34,13 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative w-full py-20 md:py-32 text-center bg-gradient-to-br from-background to-muted rounded-xl shadow-lg overflow-hidden">
         {/* Five Column Backdrop with descriptive text */}
-        <div className="absolute inset-0 flex opacity-10"> {/* Removed pointer-events-none, adjusted opacity */}
+        <div className="absolute inset-0 flex opacity-10">
           {backdropFeatures.map((feature) => (
             <div
               key={feature.title}
-              className="group flex-1 border-r border-primary/10 last:border-r-0 flex flex-col items-center justify-center p-3 text-center transition-all duration-300 hover:bg-primary/5" // Added group and hover:bg
+              className="group flex-1 border-r border-primary/10 last:border-r-0 flex flex-col items-center justify-center p-3 text-center transition-all duration-300 hover:bg-primary/5"
             >
-              <h4 className="text-sm font-medium text-primary/60 break-words group-hover:text-primary group-hover:font-semibold transition-all duration-300">{feature.title}</h4> {/* Adjusted text opacity and added group-hover effects */}
+              <h4 className="text-sm font-medium text-primary/60 break-words group-hover:text-primary group-hover:font-semibold transition-all duration-300">{feature.title}</h4>
             </div>
           ))}
         </div>
@@ -57,7 +51,7 @@ export default function HomePage() {
             Welcome to MatrixLAB
           </h1>
           <p className="max-w-[700px] mx-auto text-lg md:text-xl text-foreground/80 mb-8 font-body">
-            From first principles to PCA mastery. {/* Changed text here */}
+            From first principles to PCA mastery.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-md transition-transform hover:scale-105">
