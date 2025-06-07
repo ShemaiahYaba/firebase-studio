@@ -25,22 +25,32 @@ const features = [
   },
 ];
 
+const backdropFeatures = [
+  { title: "EV-EV Crash Course" },
+  { title: "EV-EV Visualizations" },
+  { title: "Matrix Playground" },
+  { title: "Power Method Visualization" },
+  { title: "PCA" },
+];
+
 export default function HomePage() {
   return (
     <div className="flex flex-col items-center">
       {/* Hero Section */}
       <section className="relative w-full py-20 md:py-32 text-center bg-gradient-to-br from-background to-muted rounded-xl shadow-lg overflow-hidden">
-        {/* Five Column Backdrop */}
-        <div className="absolute inset-0 flex pointer-events-none opacity-50">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <div 
-              key={i} 
-              className="flex-1 bg-primary/5 border-r border-primary/10 last:border-r-0"
-            ></div>
+        {/* Five Column Backdrop with descriptive text */}
+        <div className="absolute inset-0 flex pointer-events-none opacity-20">
+          {backdropFeatures.map((feature) => (
+            <div
+              key={feature.title}
+              className="flex-1 border-r border-primary/10 last:border-r-0 flex flex-col items-center justify-center p-3 text-center"
+            >
+              <h4 className="text-sm font-medium text-primary/70 break-words">{feature.title}</h4>
+            </div>
           ))}
         </div>
         
-        <div className="relative container px-4 md:px-6"> {/* Added 'relative' to ensure content is above backdrop */}
+        <div className="relative container px-4 md:px-6">
           <Sigma className="h-24 w-24 text-primary mx-auto mb-6" />
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 font-headline text-primary">
             Welcome to MatrixLAB
