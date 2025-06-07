@@ -23,23 +23,23 @@
     --muted: 0 0% 96.1%; /* Very Light Gray */
     --muted-foreground: 0 0% 45.1%; /* Medium Gray */
 
-    --accent: 0 0% 9%; /* Dark Gray / Near Black */
-    --accent-foreground: 0 0% 98%; /* Off-White */
+    --accent: 220 70% 50%; /* Deep Blue */
+    --accent-foreground: 0 0% 100%; /* White */
 
     --destructive: 0 0% 40%; /* Dark Gray for destructive elements */
     --destructive-foreground: 0 0% 100%; /* White */
 
     --border: 0 0% 89.8%; /* Light Gray Border */
     --input: 0 0% 92%; /* Light Gray Input Background */
-    --ring: 0 0% 0%; /* Black for focus rings */
+    --ring: 220 70% 50%; /* Deep Blue for focus rings */
 
     --radius: 0.5rem;
 
-    --chart-1: 0 0% 20%; /* Darkest Gray */
-    --chart-2: 0 0% 35%;
-    --chart-3: 0 0% 50%; /* Mid Gray */
-    --chart-4: 0 0% 65%;
-    --chart-5: 0 0% 80%; /* Lightest Gray */
+    --chart-1: 220 70% 30%; /* Darker Blue */
+    --chart-2: 220 70% 40%;
+    --chart-3: 220 70% 50%; /* Accent Blue */
+    --chart-4: 220 70% 60%;
+    --chart-5: 220 70% 70%; /* Lighter Blue */
   }
 
   .dark {
@@ -61,21 +61,21 @@
     --muted: 0 0% 14.9%; /* Dark Gray */
     --muted-foreground: 0 0% 63.9%; /* Light Gray */
 
-    --accent: 0 0% 98%; /* Off-White */
-    --accent-foreground: 0 0% 9%; /* Dark Gray / Near Black */
+    --accent: 220 70% 65%; /* Brighter Deep Blue for Dark Mode */
+    --accent-foreground: 0 0% 100%; /* White */
     
     --destructive: 0 0% 70%; /* Lighter Gray for destructive elements in dark mode */
     --destructive-foreground: 0 0% 0%; /* Black */
 
     --border: 0 0% 20%; /* Dark Gray Border */
     --input: 0 0% 17%; /* Dark Gray Input Background */
-    --ring: 0 0% 100%; /* White for focus rings */
+    --ring: 220 70% 65%; /* Brighter Deep Blue for focus rings */
     
-    --chart-1: 0 0% 80%; /* Lightest Gray */
-    --chart-2: 0 0% 65%;
-    --chart-3: 0 0% 50%; /* Mid Gray */
-    --chart-4: 0 0% 35%;
-    --chart-5: 0 0% 20%; /* Darkest Gray */
+    --chart-1: 220 70% 70%; /* Lighter Blue */
+    --chart-2: 220 70% 60%;
+    --chart-3: 220 70% 50%; /* Mid Blue */
+    --chart-4: 220 70% 40%;
+    --chart-5: 220 70% 30%; /* Darker Blue */
   }
 }
 
