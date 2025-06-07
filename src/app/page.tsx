@@ -25,11 +25,11 @@ const features = [
 ];
 
 const backdropFeatures = [
-  { title: "EV-EV Crash Course", description: "Eigenvalues & Eigenvectors: Like VIPs, they keep their direction under transformation!" },
-  { title: "EV-EV Visualizations", description: "See the matrix's 'personality' – how it stretches and squashes space!" },
-  { title: "Matrix Playground", description: "Your sandbox for matrix math. No actual sand, we promise." },
-  { title: "Power Method", description: "Iteratively unmasking the 'strongest' eigenvector, one step at a time!" },
-  { title: "PCA", description: "Principal Component Analysis: Finding the essence of your data, like a digital Marie Kondo!" },
+  { title: "EV-EV Crash Course", description: "Eigenvalues & Eigenvectors: Like VIPs, they keep their direction under transformation! Uncover their secrets." },
+  { title: "EV-EV Visualizations", description: "See the matrix's 'personality' – how it stretches, squashes, and rotates space. A visual feast!" },
+  { title: "Matrix Playground", description: "Your sandbox for matrix math. Experiment freely. No actual sand, we promise (it gets everywhere)." },
+  { title: "Power Method", description: "Iteratively unmasking the 'strongest' eigenvector, one powerful step at a time! Feel the dominance." },
+  { title: "PCA", description: "Principal Component Analysis: Finding the essence of your data, like a digital Marie Kondo! Spark joy with dimensions." },
 ];
 
 export default function HomePage() {
@@ -40,43 +40,52 @@ export default function HomePage() {
       {/* Hero Section */}
       <section
         className="relative w-full py-20 md:py-32 text-center bg-gradient-to-br from-background to-muted rounded-xl shadow-lg overflow-hidden"
-        onMouseLeave={() => setExpandedColumnIndex(null)} // Reset when mouse leaves the entire section
+        onMouseLeave={() => setExpandedColumnIndex(null)}
       >
-        {/* Five Column Backdrop with descriptive text */}
-        <div className="absolute inset-0 flex"> {/* Container for columns */}
+        {/* Five Column Backdrop */}
+        <div className="absolute inset-0 flex">
           {backdropFeatures.map((feature, index) => (
             <div
               key={feature.title}
-              onMouseEnter={() => setExpandedColumnIndex(index)}
+              // Outer div for visual expansion and holding blurred text
               className={cn(
-                "group flex flex-col items-center p-3 text-center border-r border-primary/10 last:border-r-0",
-                "transition-all duration-500 ease-in-out", // General transition for all properties
-                // Default state (when no column is expanded)
+                "group flex flex-col items-center p-3 text-center border-r border-primary/10 last:border-r-0 relative", // Added relative
+                "transition-all duration-500 ease-in-out",
                 expandedColumnIndex === null ? "flex-1 justify-start pt-6 opacity-60" : "",
-                // Expanded state for the current column
                 expandedColumnIndex === index
-                  ? "flex-grow-[5] bg-background/95 opacity-100 z-10 justify-start pt-6" // flex-grow-[5] to expand significantly
+                  ? "flex-grow-[5] bg-background/95 opacity-100 z-10 justify-start pt-6" // Expanded column
                   : "",
-                // Other columns when one IS expanded (they should shrink/hide)
                 expandedColumnIndex !== null && expandedColumnIndex !== index
-                  ? "flex-grow-[0] opacity-0 scale-90 w-0 p-0 border-0 overflow-hidden" // flex-grow-[0] and w-0 to collapse
+                  ? "flex-grow-[0] opacity-0 scale-90 w-0 p-0 border-0 overflow-hidden" // Shrunken columns
                   : ""
               )}
             >
+              {/* Blurred Title - visible when column is not expanded or is a shrunken one */}
               <h4 className={cn(
-                "font-bold break-words transition-all duration-300",
-                expandedColumnIndex === index
-                  ? "text-primary text-xl mb-2 filter-none" // Text style when this column is expanded, remove blur
-                  : "text-sm filter blur-[1.5px]", // Text style for non-expanded, add blur
-                expandedColumnIndex === null ? "text-primary/80" : "text-primary" // Default visibility vs when one is active
+                "font-bold break-words transition-all duration-300 text-sm",
+                expandedColumnIndex === index ? "opacity-0" : "filter blur-[1.5px]", // Hide if this column is expanded, else blur
+                expandedColumnIndex === null ? "text-primary/80" : "text-primary"
               )}>
                 {feature.title}
               </h4>
-              {/* Integrated descriptive text - shown only when column is expanded */}
+
+              {/* Interaction Wrapper for bottom 50% */}
+              <div
+                onMouseEnter={() => setExpandedColumnIndex(index)}
+                className="absolute bottom-0 left-0 w-full h-1/2 cursor-pointer z-0"
+                aria-label={`Expand ${feature.title}`}
+              />
+
+              {/* Expanded Content - shown only when this column is expanded */}
               {expandedColumnIndex === index && (
-                <p className="mt-2 text-xs md:text-sm text-foreground/80 transition-opacity duration-300 ease-in-out opacity-100 px-2 max-w-xs mx-auto">
-                  {feature.description}
-                </p>
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-background/90 transition-opacity duration-300 ease-in-out">
+                  <h4 className="text-primary text-xl mb-2 font-bold filter-none">
+                    {feature.title}
+                  </h4>
+                  <p className="text-xs md:text-sm text-foreground/80 opacity-100 px-2 max-w-xs mx-auto">
+                    {feature.description}
+                  </p>
+                </div>
               )}
             </div>
           ))}
@@ -84,8 +93,8 @@ export default function HomePage() {
         
         {/* Main Hero Content - Fades out when a column is expanded */}
         <div className={cn(
-          "relative container px-4 md:px-6 transition-opacity duration-300 ease-in-out",
-          expandedColumnIndex !== null ? "opacity-0 pointer-events-none" : "opacity-100" // Fade out if a column is expanded
+          "relative container px-4 md:px-6 transition-opacity duration-300 ease-in-out z-20", // Ensure hero content is above backdrop interactivity initially
+          expandedColumnIndex !== null ? "opacity-0 pointer-events-none" : "opacity-100"
         )}>
           <Sigma className="h-24 w-24 text-primary mx-auto mb-6" />
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 font-headline text-primary">
