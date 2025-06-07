@@ -80,7 +80,7 @@ export default function HomePage() {
           <h2 className="text-4xl font-bold tracking-tight text-center mb-12 font-headline text-primary">
             Explore MatrixLAB's Features
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {features.map((feature) => (
               <Card key={feature.title} className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg overflow-hidden">
                 <CardHeader className="items-center text-center bg-card">
