@@ -2,7 +2,8 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Sigma, LayoutPanelLeft, BookOpenText, ArrowRight } from 'lucide-react'; // Removed Lightbulb
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Sigma, LayoutPanelLeft, BookOpenText, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 
 const features = [
@@ -21,52 +22,60 @@ const features = [
 ];
 
 const backdropFeatures = [
-  { title: "EV-EV Crash Course" },
-  { title: "EV-EV Visualizations" },
-  { title: "Matrix Playground" },
-  { title: "Power Method Visualization" },
-  { title: "PCA" },
+  { title: "EV-EV Crash Course", tooltip: "Eigenvalues & Eigenvectors: Like VIPs, they keep their direction under transformation!" },
+  { title: "EV-EV Visualizations", tooltip: "See the matrix's 'personality' – how it stretches and squashes space!" },
+  { title: "Matrix Playground", tooltip: "Your sandbox for matrix math. No actual sand, we promise." },
+  { title: "Power Method", tooltip: "Iteratively unmasking the 'strongest' eigenvector, one step at a time!" },
+  { title: "PCA", tooltip: "Principal Component Analysis: Finding the essence of your data, like a digital Marie Kondo!" },
 ];
 
 export default function HomePage() {
   return (
     <div className="flex flex-col items-center">
       {/* Hero Section */}
-      <section className="relative w-full py-20 md:py-32 text-center bg-gradient-to-br from-background to-muted rounded-xl shadow-lg overflow-hidden">
-        {/* Five Column Backdrop with descriptive text */}
-        <div className="absolute inset-0 flex opacity-10">
-          {backdropFeatures.map((feature) => (
-            <div
-              key={feature.title}
-              className="group flex-1 border-r border-primary/10 last:border-r-0 flex flex-col items-center justify-center p-3 text-center transition-all duration-300 hover:bg-primary/5"
-            >
-              <h4 className="text-sm font-medium text-primary/60 break-words group-hover:text-primary group-hover:font-semibold transition-all duration-300">{feature.title}</h4>
-            </div>
-          ))}
-        </div>
-        
-        <div className="relative container px-4 md:px-6">
-          <Sigma className="h-24 w-24 text-primary mx-auto mb-6" />
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 font-headline text-primary">
-            Welcome to MatrixLAB
-          </h1>
-          <p className="max-w-[700px] mx-auto text-lg md:text-xl text-foreground/80 mb-8 font-body">
-            From first principles to PCA mastery.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-md transition-transform hover:scale-105">
-              <Link href="/playground">
-                Try It Now <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="text-primary border-primary hover:bg-primary/10 shadow-md transition-transform hover:scale-105">
-              <Link href="/resources">
-                Learn More
-              </Link>
-            </Button>
+      <TooltipProvider delayDuration={100}>
+        <section className="relative w-full py-20 md:py-32 text-center bg-gradient-to-br from-background to-muted rounded-xl shadow-lg overflow-hidden">
+          {/* Five Column Backdrop with descriptive text */}
+          <div className="absolute inset-0 flex opacity-10">
+            {backdropFeatures.map((feature) => (
+              <Tooltip key={feature.title}>
+                <TooltipTrigger asChild>
+                  <div
+                    className="group flex-1 border-r border-primary/10 last:border-r-0 flex flex-col items-center justify-center p-3 text-center transition-all duration-300 hover:bg-primary/5 group-hover:justify-start group-hover:pt-6"
+                  >
+                    <h4 className="text-sm font-medium text-primary/60 break-words group-hover:text-primary group-hover:font-semibold transition-all duration-300">{feature.title}</h4>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent className="bg-popover text-popover-foreground shadow-lg rounded-md">
+                  <p>{feature.tooltip}</p>
+                </TooltipContent>
+              </Tooltip>
+            ))}
           </div>
-        </div>
-      </section>
+          
+          <div className="relative container px-4 md:px-6">
+            <Sigma className="h-24 w-24 text-primary mx-auto mb-6" />
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 font-headline text-primary">
+              Welcome to MatrixLAB
+            </h1>
+            <p className="max-w-[700px] mx-auto text-lg md:text-xl text-foreground/80 mb-8 font-body">
+              From first principles to PCA mastery.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-md transition-transform hover:scale-105">
+                <Link href="/playground">
+                  Try It Now <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="text-primary border-primary hover:bg-primary/10 shadow-md transition-transform hover:scale-105">
+                <Link href="/resources">
+                  Learn More
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+      </TooltipProvider>
 
       {/* Features Section */}
       <section className="w-full py-16 md:py-24">
