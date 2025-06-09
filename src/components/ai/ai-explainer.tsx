@@ -1,6 +1,7 @@
+
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useActionState, useEffect } from "react"; // Changed from react-dom to react, and useFormState to useActionState
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -12,6 +13,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Lightbulb, Loader2 } from "lucide-react";
 import type { Matrix } from "@/lib/constants";
 import { getAIExplanation } from "@/app/actions"; // Server Action
+import { useFormStatus } from "react-dom"; // Kept for SubmitButton
 
 const formSchema = z.object({
   matrixString: z.string().min(1, "Matrix representation is required."),
@@ -37,7 +39,7 @@ function SubmitButton() {
 
 export function AIExplainer({ currentMatrix }: AIExplainerProps) {
   const matrixString = JSON.stringify(
-    currentMatrix.map(row => 
+    currentMatrix.map(row =>
       row.map(cell => {
         const num = parseFloat(String(cell));
         return isNaN(num) ? 0 : num; // Default non-numeric to 0 for AI
@@ -54,7 +56,7 @@ export function AIExplainer({ currentMatrix }: AIExplainerProps) {
     },
     mode: "onChange",
   });
-  
+
   // Update matrixString in form if currentMatrix changes
   useEffect(() => {
     form.setValue("matrixString", matrixString);
@@ -62,7 +64,8 @@ export function AIExplainer({ currentMatrix }: AIExplainerProps) {
 
 
   const initialState = { message: "", explanation: "", errors: {} };
-  const [state, formAction] = useFormState(getAIExplanation, initialState);
+  // Updated to useActionState
+  const [state, formAction] = useActionState(getAIExplanation, initialState);
 
 
   return (
@@ -148,7 +151,3 @@ export function AIExplainer({ currentMatrix }: AIExplainerProps) {
     </Card>
   );
 }
-
-// Need to add useEffect because the form is a controlled component from react-hook-form
-// but the hidden input needs to be updated when currentMatrix prop changes for the server action
-import { useEffect } from 'react';
