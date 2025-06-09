@@ -25,11 +25,11 @@ const features = [
 ];
 
 const backdropFeatures = [
-  { title: "EV-EV Crash Course", description: "Eigenvalues & Eigenvectors: Like VIPs, they keep their direction under transformation! Uncover their secrets." },
-  { title: "EV-EV Visualizations", description: "See the matrix's 'personality' – how it stretches, squashes, and rotates space. A visual feast!" },
-  { title: "Matrix Playground", description: "Your sandbox for matrix math. Experiment freely. No actual sand, we promise (it gets everywhere)." },
-  { title: "Power Method", description: "Iteratively unmasking the 'strongest' eigenvector, one powerful step at a time! Feel the dominance." },
-  { title: "PCA", description: "Principal Component Analysis: Finding the essence of your data, like a digital Marie Kondo! Spark joy with dimensions." },
+  { title: "EV-EV Crash Course", description: "Eigenvalues & Eigenvectors: Like VIPs, they keep their direction under transformation! Uncover their secrets.", tooltip: "Unlock Eigen-magic!" },
+  { title: "EV-EV Visualizations", description: "See the matrix's 'personality' – how it stretches, squashes, and rotates space. A visual feast!", tooltip: "Matrices: The Space Invaders" },
+  { title: "Matrix Playground", description: "Your sandbox for matrix math. Experiment freely. No actual sand, we promise (it gets everywhere).", tooltip: "Enter the Matrix... Sandbox" },
+  { title: "Power Method", description: "Iteratively unmasking the 'strongest' eigenvector, one powerful step at a time! Feel the dominance.", tooltip: "Unleash the Power!" },
+  { title: "PCA", description: "Principal Component Analysis: Finding the essence of your data, like a digital Marie Kondo! Spark joy with dimensions.", tooltip: "Data's Inner Zen" },
 ];
 
 export default function HomePage() {
@@ -48,7 +48,7 @@ export default function HomePage() {
             <div
               key={feature.title}
               className={cn(
-                "group flex flex-col items-center p-3 text-center border-r border-primary/10 last:border-r-0 relative", 
+                "group flex flex-col p-3 text-center border-r border-primary/10 last:border-r-0 relative", 
                 "transition-all duration-500 ease-in-out",
                 expandedColumnIndex === null ? "flex-1 justify-start pt-6 opacity-60" : "",
                 expandedColumnIndex === index
@@ -82,7 +82,7 @@ export default function HomePage() {
                     {feature.description}
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center mt-auto pt-4">
-                    <Button asChild size="md" className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-md transition-transform hover:scale-105">
+                    <Button asChild size="md" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-md transition-transform hover:scale-105">
                       <Link href="/playground">
                         Try It Now <ArrowRight className="ml-2 h-5 w-5" />
                       </Link>
@@ -110,7 +110,7 @@ export default function HomePage() {
           <p className="max-w-[700px] mx-auto text-lg md:text-xl text-foreground/80 mb-8 font-body">
             from first principles to pca mastery.
           </p>
-          {/* Original CTAs removed from here */}
+          {/* Original CTAs removed from here and moved into expanded column */}
         </div>
       </section>
 
