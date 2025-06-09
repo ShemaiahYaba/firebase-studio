@@ -1,5 +1,6 @@
+
 import Link from 'next/link';
-import { Sigma, LayoutPanelLeft, BookOpenText, Menu } from 'lucide-react';
+import { Sigma, LayoutPanelLeft, BookOpenText, Menu, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
@@ -7,6 +8,7 @@ const navItems = [
   { href: '/', label: 'Home', icon: <Sigma className="h-5 w-5" /> },
   { href: '/playground', label: 'Playground', icon: <LayoutPanelLeft className="h-5 w-5" /> },
   { href: '/resources', label: 'Resources', icon: <BookOpenText className="h-5 w-5" /> },
+  { href: '/about', label: 'About', icon: <Info className="h-5 w-5" /> },
 ];
 
 export function Navbar() {
