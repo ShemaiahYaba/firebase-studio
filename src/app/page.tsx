@@ -8,6 +8,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Sigma, LayoutPanelLeft, BookOpenText, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+
 
 const features = [
   {
@@ -60,8 +62,8 @@ export default function HomePage() {
               )}
             >
               <h4 className={cn(
-                "font-bold break-words transition-all duration-300 text-sm",
-                expandedColumnIndex === index ? "opacity-0" : "filter blur-[1.5px]", 
+                "font-bold break-words transition-all duration-300",
+                expandedColumnIndex === index ? "opacity-0" : "filter blur-[1.5px]", // Blur when not expanded
                 expandedColumnIndex === null ? "text-primary/80" : "text-primary"
               )}>
                 {feature.title}
@@ -69,25 +71,25 @@ export default function HomePage() {
 
               <div
                 onMouseEnter={() => setExpandedColumnIndex(index)}
-                className="absolute bottom-0 left-0 w-full h-1/2 cursor-pointer z-0"
+                className="absolute bottom-0 left-0 w-full h-1/2 cursor-pointer z-0" // Interaction area for hover
                 aria-label={`Expand ${feature.title}`}
               />
 
               {expandedColumnIndex === index && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-background/90 transition-opacity duration-300 ease-in-out">
-                  <h4 className="text-primary text-xl mb-2 font-bold filter-none">
+                  <h4 className="text-primary text-xl mb-2 font-bold filter-none"> {/* Title visible when expanded */}
                     {feature.title}
                   </h4>
                   <p className="text-xs md:text-sm text-foreground/80 opacity-100 px-2 max-w-xs mx-auto mb-4">
                     {feature.description}
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center mt-auto pt-4">
-                    <Button asChild size="md" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-md transition-transform hover:scale-105">
+                    <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-md transition-transform hover:scale-105">
                       <Link href="/playground">
                         Try It Now <ArrowRight className="ml-2 h-5 w-5" />
                       </Link>
                     </Button>
-                    <Button asChild variant="outline" size="md" className="text-primary border-primary hover:bg-primary/10 shadow-md transition-transform hover:scale-105">
+                    <Button asChild variant="outline" size="lg" className="text-primary border-primary hover:bg-primary/10 shadow-md transition-transform hover:scale-105">
                       <Link href="/resources">
                         Learn More
                       </Link>
