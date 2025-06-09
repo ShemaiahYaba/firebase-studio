@@ -22,14 +22,6 @@ const teamMembers = [
     avatarFallback: "RS",
     bio: "Raj leads the development team, ensuring MatrixLAB is robust, scalable, and performant. He loves tackling challenging technical problems.",
     dataAiHint: "engineer portrait"
-  },
-  {
-    name: "Sofia Chen",
-    role: "UX & Educational Content Lead",
-    avatarSrc: "https://placehold.co/100x100.png",
-    avatarFallback: "SC",
-    bio: "Sofia focuses on creating a seamless user experience and developing engaging educational materials for MatrixLAB users.",
-    dataAiHint: "designer portrait"
   }
 ];
 
@@ -107,7 +99,7 @@ export default function AboutUsPage() {
             We are a dedicated group of educators, developers, and designers passionate about mathematics and technology.
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
           {teamMembers.map((member) => (
             <Card key={member.name} className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
               <CardHeader className="items-center text-center">
