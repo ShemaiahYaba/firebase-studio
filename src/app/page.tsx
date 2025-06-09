@@ -8,7 +8,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Sigma, LayoutPanelLeft, BookOpenText, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 
 const features = [
@@ -27,7 +26,7 @@ const features = [
 ];
 
 const backdropFeatures = [
-  { title: "EV-EV Crash Course", description: "Eigenvalues & Eigenvectors: Like VIPs, they keep their direction under transformation! Uncover their secrets.", tooltip: "Unlock Eigen-magic!" },
+  { title: "EV-EV Crash Course", description: "Eigenvalues & Eigenvectors: Like VIPs, they keep their direction under transformation! Uncover their secrets. This is a much longer description to test the scrolling behavior. It needs to be long enough to potentially overflow the available space in the expanded column, especially on smaller viewports or when the hero section itself isn't very tall. We're adding more and more text here to simulate a real-world scenario where a feature might have a detailed explanation that shouldn't push the call-to-action buttons off-screen. Let's add even more. Still more. One more sentence should do it for testing purposes.", tooltip: "Unlock Eigen-magic!" },
   { title: "EV-EV Visualizations", description: "See the matrix's 'personality' – how it stretches, squashes, and rotates space. A visual feast!", tooltip: "Matrices: The Space Invaders" },
   { title: "Matrix Playground", description: "Your sandbox for matrix math. Experiment freely. No actual sand, we promise (it gets everywhere).", tooltip: "Enter the Matrix... Sandbox" },
   { title: "Power Method", description: "Iteratively unmasking the 'strongest' eigenvector, one powerful step at a time! Feel the dominance.", tooltip: "Unleash the Power!" },
@@ -63,7 +62,7 @@ export default function HomePage() {
             >
               <h4 className={cn(
                 "font-bold break-words transition-all duration-300",
-                expandedColumnIndex === index ? "opacity-0" : "filter blur-[1.5px]", // Blur when not expanded
+                expandedColumnIndex === index ? "opacity-0" : "filter blur-[1.5px]",
                 expandedColumnIndex === null ? "text-primary/80" : "text-primary"
               )}>
                 {feature.title}
@@ -71,19 +70,21 @@ export default function HomePage() {
 
               <div
                 onMouseEnter={() => setExpandedColumnIndex(index)}
-                className="absolute bottom-0 left-0 w-full h-1/2 cursor-pointer z-0" // Interaction area for hover
+                className="absolute bottom-0 left-0 w-full h-1/2 cursor-pointer z-0" 
                 aria-label={`Expand ${feature.title}`}
               />
 
               {expandedColumnIndex === index && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-background/90 transition-opacity duration-300 ease-in-out">
-                  <h4 className="text-primary text-xl mb-2 font-bold filter-none"> {/* Title visible when expanded */}
+                <div className="absolute inset-0 flex flex-col items-center p-6 bg-background/90 transition-opacity duration-300 ease-in-out">
+                  <h4 className="text-primary text-xl mb-4 font-bold filter-none text-center flex-shrink-0">
                     {feature.title}
                   </h4>
-                  <p className="text-xs md:text-sm text-foreground/80 opacity-100 px-2 max-w-xs mx-auto mb-4">
-                    {feature.description}
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center mt-auto pt-4">
+                  <div className="flex-grow overflow-y-auto mb-4 w-full max-w-md">
+                    <p className="text-xs md:text-sm text-foreground/80 opacity-100 px-2 text-center">
+                      {feature.description}
+                    </p>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4 flex-shrink-0">
                     <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-md transition-transform hover:scale-105">
                       <Link href="/playground">
                         Try It Now <ArrowRight className="ml-2 h-5 w-5" />
@@ -112,7 +113,6 @@ export default function HomePage() {
           <p className="max-w-[700px] mx-auto text-lg md:text-xl text-foreground/80 mb-8 font-body">
             from first principles to pca mastery.
           </p>
-          {/* Original CTAs removed from here and moved into expanded column */}
         </div>
       </section>
 
@@ -176,4 +176,3 @@ export default function HomePage() {
     </div>
   );
 }
-
