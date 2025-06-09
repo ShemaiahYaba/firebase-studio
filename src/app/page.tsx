@@ -1,5 +1,5 @@
 
-"use client"; // Required for useState and event handlers
+"use client"; 
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -47,53 +47,60 @@ export default function HomePage() {
           {backdropFeatures.map((feature, index) => (
             <div
               key={feature.title}
-              // Outer div for visual expansion and holding blurred text
               className={cn(
-                "group flex flex-col items-center p-3 text-center border-r border-primary/10 last:border-r-0 relative", // Added relative
+                "group flex flex-col items-center p-3 text-center border-r border-primary/10 last:border-r-0 relative", 
                 "transition-all duration-500 ease-in-out",
                 expandedColumnIndex === null ? "flex-1 justify-start pt-6 opacity-60" : "",
                 expandedColumnIndex === index
-                  ? "flex-grow-[5] bg-background/95 opacity-100 z-10 justify-start pt-6" // Expanded column
+                  ? "flex-grow-[5] bg-background/95 opacity-100 z-10 justify-start pt-6" 
                   : "",
                 expandedColumnIndex !== null && expandedColumnIndex !== index
-                  ? "flex-grow-[0] opacity-0 scale-90 w-0 p-0 border-0 overflow-hidden" // Shrunken columns
+                  ? "flex-grow-[0] opacity-0 scale-90 w-0 p-0 border-0 overflow-hidden" 
                   : ""
               )}
             >
-              {/* Blurred Title - visible when column is not expanded or is a shrunken one */}
               <h4 className={cn(
                 "font-bold break-words transition-all duration-300 text-sm",
-                expandedColumnIndex === index ? "opacity-0" : "filter blur-[1.5px]", // Hide if this column is expanded, else blur
+                expandedColumnIndex === index ? "opacity-0" : "filter blur-[1.5px]", 
                 expandedColumnIndex === null ? "text-primary/80" : "text-primary"
               )}>
                 {feature.title}
               </h4>
 
-              {/* Interaction Wrapper for bottom 50% */}
               <div
                 onMouseEnter={() => setExpandedColumnIndex(index)}
                 className="absolute bottom-0 left-0 w-full h-1/2 cursor-pointer z-0"
                 aria-label={`Expand ${feature.title}`}
               />
 
-              {/* Expanded Content - shown only when this column is expanded */}
               {expandedColumnIndex === index && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-background/90 transition-opacity duration-300 ease-in-out">
                   <h4 className="text-primary text-xl mb-2 font-bold filter-none">
                     {feature.title}
                   </h4>
-                  <p className="text-xs md:text-sm text-foreground/80 opacity-100 px-2 max-w-xs mx-auto">
+                  <p className="text-xs md:text-sm text-foreground/80 opacity-100 px-2 max-w-xs mx-auto mb-4">
                     {feature.description}
                   </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center mt-auto pt-4">
+                    <Button asChild size="md" className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-md transition-transform hover:scale-105">
+                      <Link href="/playground">
+                        Try It Now <ArrowRight className="ml-2 h-5 w-5" />
+                      </Link>
+                    </Button>
+                    <Button asChild variant="outline" size="md" className="text-primary border-primary hover:bg-primary/10 shadow-md transition-transform hover:scale-105">
+                      <Link href="/resources">
+                        Learn More
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
               )}
             </div>
           ))}
         </div>
         
-        {/* Main Hero Content - Fades out when a column is expanded */}
         <div className={cn(
-          "relative container px-4 md:px-6 transition-opacity duration-300 ease-in-out z-20", // Ensure hero content is above backdrop interactivity initially
+          "relative container px-4 md:px-6 transition-opacity duration-300 ease-in-out z-20", 
           expandedColumnIndex !== null ? "opacity-0 pointer-events-none" : "opacity-100"
         )}>
           <Sigma className="h-24 w-24 text-primary mx-auto mb-6" />
@@ -103,18 +110,7 @@ export default function HomePage() {
           <p className="max-w-[700px] mx-auto text-lg md:text-xl text-foreground/80 mb-8 font-body">
             from first principles to pca mastery.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-md transition-transform hover:scale-105">
-              <Link href="/playground">
-                Try It Now <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="text-primary border-primary hover:bg-primary/10 shadow-md transition-transform hover:scale-105">
-              <Link href="/resources">
-                Learn More
-              </Link>
-            </Button>
-          </div>
+          {/* Original CTAs removed from here */}
         </div>
       </section>
 
