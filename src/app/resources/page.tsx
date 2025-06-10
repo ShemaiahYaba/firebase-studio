@@ -1,26 +1,31 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { BookOpenText, GraduationCap, FileText, Lightbulb } from "lucide-react";
+import { BookOpenText, GraduationCap, FileText, Lightbulb, ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link"; // Import Link
 
 const resourceTopics = [
   {
     icon: <GraduationCap className="h-8 w-8 text-accent" />,
     title: "Introduction to Matrices",
     description: "Learn the fundamentals of matrices, their types, and basic operations.",
-    link: "#"
+    link: "#", // Placeholder, or create a page for this
+    isExternal: false,
   },
   {
     icon: <FileText className="h-8 w-8 text-accent" />,
     title: "Eigenvalues and Eigenvectors",
-    description: "Explore the concepts of eigenvalues and eigenvectors and their significance.",
-    link: "#"
+    description: "Explore concepts and their significance. Start with our First Principles Crash Course.",
+    link: "/learn/eigen-crash-course",
+    isExternal: false,
   },
   {
     icon: <Lightbulb className="h-8 w-8 text-accent" />,
     title: "Matrix Transformations",
     description: "Understand how matrices can represent linear transformations in geometric space.",
-    link: "#"
+    link: "#", // Placeholder, or create a page for this
+    isExternal: false,
   }
 ];
 
@@ -67,8 +72,15 @@ export default function ResourcesPage() {
                 <CardDescription className="text-center font-body">{topic.description}</CardDescription>
               </CardContent>
               <div className="p-4 mt-auto text-center">
-                 {/* For now, links are #, will be actual links in a full app */}
-                <a href={topic.link} className="text-accent hover:text-accent/80 font-semibold font-body">Learn More &rarr;</a>
+                <Link href={topic.link} passHref legacyBehavior={topic.isExternal}>
+                  <a 
+                    className="inline-flex items-center text-accent hover:text-accent/80 font-semibold font-body transition-colors"
+                    target={topic.isExternal ? "_blank" : "_self"}
+                    rel={topic.isExternal ? "noopener noreferrer" : ""}
+                  >
+                    Learn More <ArrowRight className="ml-2 h-4 w-4" />
+                  </a>
+                </Link>
               </div>
             </Card>
           ))}
@@ -119,3 +131,5 @@ export default function ResourcesPage() {
     </div>
   );
 }
+
+    
