@@ -1,9 +1,9 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { BookOpenText, GraduationCap, FileText, Lightbulb, ArrowRight } from "lucide-react";
+import { BookOpenText, GraduationCap, FileText, Lightbulb, ArrowRight, Projector } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link"; // Import Link
+import Link from "next/link"; 
 
 const resourceTopics = [
   {
@@ -21,10 +21,10 @@ const resourceTopics = [
     isExternal: false,
   },
   {
-    icon: <Lightbulb className="h-8 w-8 text-accent" />,
+    icon: <Projector className="h-8 w-8 text-accent" />,
     title: "Matrix Transformations",
-    description: "Understand how matrices can represent linear transformations in geometric space.",
-    link: "#", 
+    description: "Understand how matrices can represent linear transformations in geometric space. Visual guides available.",
+    link: "/learn/matrix-transformations", 
     isExternal: false,
   }
 ];
