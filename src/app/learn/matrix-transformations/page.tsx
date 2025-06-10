@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
-import { GalleryHorizontal, RotateCcw, ScanLine, Maximize, Minimize, Orbit, BarChartHorizontalBig, ExternalLink, ArrowRight, Projector } from "lucide-react";
+import { GalleryHorizontal, RotateCcw, ScanLine, Maximize, Orbit, BarChartHorizontalBig, ExternalLink, ArrowRight, Projector, ShieldCheck, Layers, PlayCircle } from "lucide-react";
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ const commonTransformations = [
   {
     title: "Identity Matrix: The Unchanged",
     icon: <RotateCcw className="h-7 w-7 text-accent" />,
-    description: "The identity matrix is the 'do nothing' operator. When it transforms a vector or a space, everything remains in its original position and orientation. It's the baseline against which other transformations are often compared.",
+    description: "The identity matrix is the 'do nothing' operator. When it transforms a vector or a space, everything remains in its original position and orientation. All its eigenvalues are 1.",
     imgSrc: "https://placehold.co/400x250.png",
     imgAlt: "Identity matrix transformation visualization",
     aiHint: "grid vector unchanged"
@@ -24,7 +24,7 @@ const commonTransformations = [
   {
     title: "Scaling Matrices: Stretch & Shrink",
     icon: <Maximize className="h-7 w-7 text-accent" />,
-    description: "Scaling matrices enlarge or reduce vectors and shapes. Uniform scaling affects all directions equally (a circle stays a circle), while non-uniform scaling stretches or squashes along specific axes (a circle might become an ellipse).",
+    description: "Scaling matrices enlarge or reduce vectors and shapes. Uniform scaling affects all directions equally. Non-uniform scaling stretches/squashes along specific axes (eigenvectors), with scaling factors as eigenvalues.",
     imgSrc: "https://placehold.co/400x250.png",
     imgAlt: "Scaling matrix transformation visualization",
     aiHint: "circle ellipse scale"
@@ -32,7 +32,7 @@ const commonTransformations = [
   {
     title: "Rotation Matrices: Spin Around",
     icon: <Orbit className="h-7 w-7 text-accent" />,
-    description: "Rotation matrices pivot vectors and shapes around the origin (or another point) by a specified angle. In 2D, this typically involves trigonometric functions (sine and cosine) to calculate the new coordinates.",
+    description: "Rotation matrices pivot vectors and shapes around the origin. In 2D, most rotations don't have real eigenvectors (unless 0° or 180°), but in 3D, the axis of rotation is an eigenvector with eigenvalue 1.",
     imgSrc: "https://placehold.co/400x250.png",
     imgAlt: "Rotation matrix transformation visualization",
     aiHint: "vector rotation origin"
@@ -40,7 +40,7 @@ const commonTransformations = [
   {
     title: "Shear Matrices: Tilt and Skew",
     icon: <BarChartHorizontalBig className="h-7 w-7 text-accent" />,
-    description: "Shear matrices slant shapes. For example, a horizontal shear might transform a square into a parallelogram by shifting its top edge sideways while the base remains fixed. It's like pushing a deck of cards.",
+    description: "Shear matrices slant shapes. A horizontal shear, for example, keeps horizontal lines horizontal (eigenvectors) but shifts points on them based on their vertical distance.",
     imgSrc: "https://placehold.co/400x250.png",
     imgAlt: "Shear matrix transformation visualization",
     aiHint: "square parallelogram shear"
@@ -48,10 +48,26 @@ const commonTransformations = [
   {
     title: "Reflection Matrices: Mirror Image",
     icon: <ScanLine className="h-7 w-7 text-accent" />,
-    description: "Reflection matrices flip vectors or shapes across a line (in 2D) or a plane (in 3D), creating a mirror image. Reflecting across the y-axis, for instance, negates the x-coordinates.",
+    description: "Reflection matrices flip vectors across a line (2D) or plane (3D). Vectors on the reflection line/plane are eigenvectors (eigenvalue 1); vectors perpendicular are also eigenvectors (eigenvalue -1).",
     imgSrc: "https://placehold.co/400x250.png",
     imgAlt: "Reflection matrix transformation visualization",
     aiHint: "vector reflection axis"
+  },
+  {
+    title: "Orthogonal Matrices: Preserve Structure",
+    icon: <ShieldCheck className="h-7 w-7 text-accent" />,
+    description: "Orthogonal matrices preserve dot products, meaning they maintain lengths of vectors and angles between them. Rotations and reflections are key examples of orthogonal transformations.",
+    imgSrc: "https://placehold.co/400x250.png",
+    imgAlt: "Orthogonal matrix transformation visualization",
+    aiHint: "shape preserved angles"
+  },
+  {
+    title: "Projection Matrices: Casting Shadows",
+    icon: <Layers className="h-7 w-7 text-accent" />,
+    description: "Projection matrices 'cast shadows' of vectors onto a subspace (like a line or plane). They are idempotent (P²=P). Eigenvalues are 0 (for directions collapsed) or 1 (for directions within the subspace).",
+    imgSrc: "https://placehold.co/400x250.png",
+    imgAlt: "Projection matrix transformation visualization",
+    aiHint: "vector projection shadow"
   }
 ];
 
@@ -87,7 +103,7 @@ export default function MatrixTransformationsPage() {
       <Separator className="my-8 border-primary/20" />
 
       <h2 className="text-3xl font-bold text-center mb-8 font-headline text-primary">
-        Common 2D Matrix Transformations
+        Common Matrix Transformations
       </h2>
       <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
         {commonTransformations.map(tf => (
@@ -97,11 +113,20 @@ export default function MatrixTransformationsPage() {
                 {tf.icon}
                 <CardTitle className="text-2xl font-headline text-primary">{tf.title}</CardTitle>
               </div>
-              <CardDescription className="font-body text-sm text-foreground/70 h-12">{tf.description.substring(0,100)}...</CardDescription>
             </CardHeader>
-            <CardContent className="flex-grow flex flex-col justify-center items-center">
-              <Image src={tf.imgSrc} alt={tf.imgAlt} width={350} height={220} className="rounded-md shadow-sm mb-2" data-ai-hint={tf.aiHint} />
-              <p className="text-xs text-foreground/60 font-body italic">Visualization of {tf.title.toLowerCase()}.</p>
+            <CardContent className="flex-grow space-y-3">
+              <p className="font-body text-sm text-foreground/80">{tf.description}</p>
+              <div className="flex justify-center">
+                <Image src={tf.imgSrc} alt={tf.imgAlt} width={300} height={190} className="rounded-md shadow-sm mb-2" data-ai-hint={tf.aiHint} />
+              </div>
+               <p className="text-xs text-foreground/60 font-body italic text-center">Visualization of {tf.title.toLowerCase()}.</p>
+            </CardContent>
+            <CardContent className="pt-2 text-center">
+                <Button asChild variant="outline" size="sm" className="text-accent border-accent hover:bg-accent/10">
+                  <Link href="/playground">
+                    <PlayCircle className="mr-2 h-4 w-4" /> Try in Playground
+                  </Link>
+                </Button>
             </CardContent>
           </Card>
         ))}
@@ -155,7 +180,7 @@ export default function MatrixTransformationsPage() {
             </p>
           </div>
           <p>
-            These concepts are fundamental in computer graphics, robotics, and physics simulations.
+            These concepts are fundamental in computer graphics, robotics, and physics simulations. (Note: MatrixLAB playground currently focuses on 2D to 4D matrix algebra, 3D visualization capabilities are planned for future updates.)
           </p>
         </CardContent>
       </Card>
@@ -208,3 +233,6 @@ export default function MatrixTransformationsPage() {
     </div>
   );
 }
+
+
+    
