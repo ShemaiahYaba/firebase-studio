@@ -10,7 +10,7 @@ const resourceTopics = [
     icon: <GraduationCap className="h-8 w-8 text-accent" />,
     title: "Introduction to Matrices",
     description: "Learn the fundamentals of matrices, their types, and basic operations.",
-    link: "#", // Placeholder, or create a page for this
+    link: "#", 
     isExternal: false,
   },
   {
@@ -24,7 +24,7 @@ const resourceTopics = [
     icon: <Lightbulb className="h-8 w-8 text-accent" />,
     title: "Matrix Transformations",
     description: "Understand how matrices can represent linear transformations in geometric space.",
-    link: "#", // Placeholder, or create a page for this
+    link: "#", 
     isExternal: false,
   }
 ];
@@ -72,14 +72,13 @@ export default function ResourcesPage() {
                 <CardDescription className="text-center font-body">{topic.description}</CardDescription>
               </CardContent>
               <div className="p-4 mt-auto text-center">
-                <Link href={topic.link} passHref legacyBehavior={topic.isExternal}>
-                  <a 
-                    className="inline-flex items-center text-accent hover:text-accent/80 font-semibold font-body transition-colors"
-                    target={topic.isExternal ? "_blank" : "_self"}
-                    rel={topic.isExternal ? "noopener noreferrer" : ""}
-                  >
-                    Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                  </a>
+                <Link
+                  href={topic.link}
+                  className="inline-flex items-center text-accent hover:text-accent/80 font-semibold font-body transition-colors"
+                  target={topic.isExternal ? "_blank" : "_self"}
+                  rel={topic.isExternal ? "noopener noreferrer" : ""}
+                >
+                  Learn More <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>
             </Card>
@@ -131,5 +130,3 @@ export default function ResourcesPage() {
     </div>
   );
 }
-
-    
