@@ -193,9 +193,9 @@ export default function EigenCrashCoursePage() {
             </ul>
             <p>Interpreting the eigenvalue <code className="bg-muted px-1 rounded">λ</code>:</p>
             <ul className="list-disc list-inside pl-4 space-y-1">
-              <li>If <code className="bg-muted px-1 rounded">λ > 1</code>: The eigenvector is stretched.</li>
-              <li>If <code className="bg-muted px-1 rounded">0 < λ < 1</code>: The eigenvector is shrunk.</li>
-              <li>If <code className="bg-muted px-1 rounded">λ < 0</code>: The eigenvector is flipped (points in the opposite direction) AND scaled by <code className="bg-muted px-1 rounded">|λ|</code>.</li>
+              <li>If <code className="bg-muted px-1 rounded">λ &gt; 1</code>: The eigenvector is stretched.</li>
+              <li>If <code className="bg-muted px-1 rounded">0 &lt; λ &lt; 1</code>: The eigenvector is shrunk.</li>
+              <li>If <code className="bg-muted px-1 rounded">λ &lt; 0</code>: The eigenvector is flipped (points in the opposite direction) AND scaled by <code className="bg-muted px-1 rounded">|λ|</code>.</li>
               <li>If <code className="bg-muted px-1 rounded">λ = 1</code>: The eigenvector is unchanged by the transformation.</li>
               <li>If <code className="bg-muted px-1 rounded">λ = 0</code>: The eigenvector is squashed into the origin (becomes the zero vector).</li>
             </ul>
@@ -292,5 +292,3 @@ export default function EigenCrashCoursePage() {
     </div>
   );
 }
-
-    
